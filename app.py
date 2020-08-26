@@ -8,8 +8,8 @@ api = Api(app)
 
 
 # http://127.0.0.1:5000/hoteis
-api.add_resource(Hoteis, '/hoteis')
-api.add_resource(Hotel, '/hoteis/<int:hotel_id>')
+api.add_resource(Hoteis, '/hoteis/')
+api.add_resource(Hotel, '/hoteis/<string:hotel_id>/')
 
 if __name__ == '__main__':
     app.run(debug=True)
