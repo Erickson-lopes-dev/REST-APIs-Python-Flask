@@ -21,8 +21,8 @@ class HotelModel(banco.Model):
     def json(self):
         return {
             'hotel_id': self.hotel_id,
-            'estrelas': self.estrelas,
             'nome': self.nome,
+            'estrelas': self.estrelas,
             'diaria': self.diaria,
             'cidade': self.cidade
         }
@@ -36,4 +36,15 @@ class HotelModel(banco.Model):
 
     def save_hotel(self):
         banco.session.add(self)
+        banco.session.commit()
+
+    #                               **dados
+    def update_hotel(self, nome, estrelas, diaria, cidade):
+        self.nome = nome
+        self.estrelas = estrelas
+        self.diaria = diaria
+        self.cidade = cidade
+
+    def delete_hotel(self):
+        banco.session.delete(self)
         banco.session.commit()

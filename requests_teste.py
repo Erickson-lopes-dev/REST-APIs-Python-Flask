@@ -12,7 +12,7 @@ def get_hoteis():
 
 
 def get_hotel():
-    get = requests.get("http://127.0.0.1:5000/hoteis/bravo/")
+    get = requests.get("http://127.0.0.1:5000/hoteis/ass/")
     print(get.json())
 
 
@@ -23,26 +23,32 @@ def post_hotel():
         "diaria": 550.00,
         "cidade": "Paraiba"
     }
-    post = requests.post(f"http://127.0.0.1:5000/hoteis/bravo/", json=data)
+    post = requests.post(f"http://127.0.0.1:5000/hoteis/ass/", json=data)
 
     print(post.json())
 
 
 def put_hotel():
     data = {
-        "estrelas": "0",
-        "nome": "0",
-        "diaria": "0",
-        "cidade": "0"
+        "nome": "New",
+        "estrelas": 1.0,
+        "diaria": 550.00,
+        "cidade": "Paraiba"
     }
-    put = requests.put(f"http://127.0.0.1:5000/hoteis/4/", json=data)
+    put = requests.put(f"http://127.0.0.1:5000/hoteis/bravo/", json=data)
 
     print(put.json())
 
 
 def delete_hotel():
-    delete = requests.delete("http://127.0.0.1:5000/hoteis/2/")
+    delete = requests.delete("http://127.0.0.1:5000/hoteis/ass/")
     print(delete.json())
 
 
-get_hotel()
+# get_hotel()
+# print('\n')
+# post_hotel()
+# print('\n')
+# get_hotel()
+
+get_hoteis()
