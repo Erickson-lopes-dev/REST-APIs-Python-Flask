@@ -45,8 +45,6 @@ def delete_hotel():
     print(delete.json())
 
 
-get_hoteis()
-print('\n')
-delete_hotel()
+
 print('\n')
 get_hoteis()
