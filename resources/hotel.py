@@ -41,12 +41,6 @@ class Hotel(Resource):
     argumentos.add_argument('cidade')
     argumentos.add_argument('diaria')
 
-    def find_hotel(self, hotel_id):
-        for hotel in hoteis:
-            if hotel['hotel_id'] == hotel_id:
-                return hotel
-        return None
-
     def get(self, hotel_id):
         hotel = Hotel.find_hotel(self, hotel_id)
 
@@ -55,21 +49,14 @@ class Hotel(Resource):
         return {'message': 'hotel not found'}, 404
 
     def post(self, hotel_id):
+        if HotelModel.find_hotel(hotel_id):
+            return {'message': f'Hotel id "{hotel_id}" already exists.'}, 400
 
         # criar construtor
         dados = Hotel.argumentos.parse_args()
-
-        hotel_object = HotelModel(hotel_id, **dados)
-
-        novo_hotel = hotel_object.json()
-
-        # novo_hotel = {
-        #     'hotel_id': hotel_id, **dados
-        # }
-
-        hoteis.append(novo_hotel)
-
-        return novo_hotel, 200
+        hotel = HotelModel(hotel_id, **dados)
+        hotel.save_hotel()
+        return hotel.json()
 
     def put(self, hotel_id):
         hotel = Hotel.find_hotel(self, hotel_id)
@@ -93,5 +80,3 @@ class Hotel(Resource):
         hoteis = [hotel for hotel in hoteis if hotel['hotel_id'] != hotel_id]
 
         return {'message': 'Hotel deleted'}
-
-
