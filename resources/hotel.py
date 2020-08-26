@@ -1,5 +1,7 @@
 from flask_restful import Resource, reqparse
 
+from models.hotel import HotelModel
+
 hoteis = [
     {
         'hotel_id': '1',
@@ -57,9 +59,13 @@ class Hotel(Resource):
         # criar construtor
         dados = Hotel.argumentos.parse_args()
 
-        novo_hotel = {
-            'hotel_id': hotel_id, **dados
-        }
+        hotel_object = HotelModel(hotel_id, **dados)
+
+        novo_hotel = hotel_object.json()
+
+        # novo_hotel = {
+        #     'hotel_id': hotel_id, **dados
+        # }
 
         hoteis.append(novo_hotel)
 
@@ -70,9 +76,9 @@ class Hotel(Resource):
 
         dados = Hotel.argumentos.parse_args()
 
-        novo_hotel = {
-            'hotel_id': hotel_id, **dados
-        }
+        hotel_object = HotelModel(hotel_id, **dados)
+
+        novo_hotel = hotel_object.json()
 
         if hotel:
             hotel.update(novo_hotel)
@@ -83,4 +89,9 @@ class Hotel(Resource):
         return novo_hotel, 201
 
     def delete(self, hotel_id):
-        pass
+        global hoteis
+        hoteis = [hotel for hotel in hoteis if hotel['hotel_id'] != hotel_id]
+
+        return {'message': 'Hotel deleted'}
+
+

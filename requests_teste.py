@@ -40,12 +40,13 @@ def put_hotel():
     print(put.json())
 
 
-def delete_hotel(pk):
-    delete = requests.delete("http://127.0.0.1:5000/hoteis/" + str(pk))
+def delete_hotel():
+    delete = requests.delete("http://127.0.0.1:5000/hoteis/2/")
+    print(delete.json())
 
 
 get_hoteis()
 print('\n')
-put_hotel()
+delete_hotel()
 print('\n')
 get_hoteis()
