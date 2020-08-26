@@ -1,14 +1,10 @@
 from flask import Flask
-from flask_restful import Resource, Api
+from flask_restful import Api
+from resources.hotel import Hoteis
 
 app = Flask(__name__)
 
 api = Api(app)
-
-
-class Hoteis(Resource):
-    def get(self):
-        return {'hoteis': 'meus hoteis'}
 
 
 # http://127.0.0.1:5000/hoteis
