@@ -28,13 +28,24 @@ def post_hotel():
     print(post.json())
 
 
+def put_hotel():
+    data = {
+        "estrelas": "0",
+        "nome": "0",
+        "diaria": "0",
+        "cidade": "0"
+    }
+    put = requests.put(f"http://127.0.0.1:5000/hoteis/4/", json=data)
+
+    print(put.json())
+
+
 def delete_hotel(pk):
     delete = requests.delete("http://127.0.0.1:5000/hoteis/" + str(pk))
 
 
-post_hotel()
-
 get_hoteis()
-
-
-
+print('\n')
+put_hotel()
+print('\n')
+get_hoteis()
