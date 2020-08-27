@@ -62,6 +62,7 @@ def login_usuarios():
     }
     post = requests.post("http://127.0.0.1:5000/login", json=data)
     print(post.json())
+    return post.json()['acces_token']
 
 
 def logout_usuarios():
@@ -81,4 +82,19 @@ def cadastro_usuarios():
     print(post.json())
 
 
-login_usuarios()
+def post_hotel_token(token):
+    data = {
+        "estrelas": 4.0,
+        "nome": "G00",
+        "diaria": 400.00,
+        "cidade": "Paraiba"
+    }
+    post = requests.post(f"http://127.0.0.1:5000/hoteis/louvas/", json=data, headers={"Authorization": f"Bearer {token}"})
+
+    print(post.json())
+
+
+post_hotel_token(login_usuarios())
+
+get_hoteis()
+
