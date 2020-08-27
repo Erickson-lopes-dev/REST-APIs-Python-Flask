@@ -1,7 +1,7 @@
 from sql_alchemy import banco
 
 
-class HotelModel(banco.Model):
+class UserModel(banco.Model):
     # nome da tabela
     __tablename__ = 'usuarios'
 
