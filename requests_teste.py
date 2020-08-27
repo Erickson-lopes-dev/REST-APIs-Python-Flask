@@ -57,9 +57,10 @@ def delete_usuarios():
 
 def login_usuarios():
     data = {
-
+        "login": "lucas",
+        "senha": "lucas"
     }
-    post = requests.post("http://127.0.0.1:5000/login/", json=data)
+    post = requests.post("http://127.0.0.1:5000/login", json=data)
     print(post.json())
 
 
@@ -80,4 +81,4 @@ def cadastro_usuarios():
     print(post.json())
 
 
-get_usuarios()
+login_usuarios()

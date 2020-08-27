@@ -1,10 +1,14 @@
 from flask_restful import Resource, reqparse
-
 from models.usuario import UserModel
+from flask_jwt_extended import create_access_token
+from werkzeug.security import safe_str_cmp
+
+atributos = reqparse.RequestParser()
+atributos.add_argument('login', type=str, required=True, help='the fild login cannot be left')
+atributos.add_argument('senha', type=str, required=True, help='the fild senha cannot be left')
 
 
 class User(Resource):
-
     def get(self, user_id):
         usuario = UserModel.find_user(user_id)
 
@@ -26,10 +30,6 @@ class User(Resource):
 class UserRegister(Resource):
     # / cadastro
     def post(self):
-        atributos = reqparse.RequestParser()
-        atributos.add_argument('login', type=str, required=True, help='the fild login cannot be left')
-        atributos.add_argument('senha', type=str, required=True, help='the fild senha cannot be left')
-
         dados = atributos.parse_args()
 
         # saber se o id existe ou nao
@@ -39,3 +39,16 @@ class UserRegister(Resource):
         user = UserModel(**dados)
         user.save_user()
         return {"message": "user cread sucessfully"}, 201
+
+
+class UserLogin(Resource):
+    @classmethod
+    def post(cls):
+        dados = atributos.parse_args()
+        user = UserModel.find_by_login(dados['login'])
+
+        if user and safe_str_cmp(user.senha, dados['senha']):
+            token_de_acesso = create_access_token(identity=user.user_id)
+            return {'acces_token': token_de_acesso}, 200
+
+        return {'message': 'The username or passwor is incorrect'}, 401
