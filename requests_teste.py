@@ -46,12 +46,12 @@ def delete_hotel():
 
 
 def get_usuarios():
-    get = requests.get("http://127.0.0.1:5000/usuarios/1")
+    get = requests.get("http://127.0.0.1:5000/usuarios/2")
     print(get.json())
 
 
 def delete_usuarios():
-    delete = requests.delete("http://127.0.0.1:5000/usuarios/1")
+    delete = requests.delete("http://127.0.0.1:5000/usuarios/3")
     print(delete.json())
 
 
@@ -73,7 +73,11 @@ def logout_usuarios():
 
 def cadastro_usuarios():
     data = {
-
+        "login": "lucas",
+        "senha": "lucas"
     }
-    post = requests.post("http://127.0.0.1:5000/logout/", json=data)
+    post = requests.post("http://127.0.0.1:5000/cadastro", json=data)
     print(post.json())
+
+
+get_usuarios()
