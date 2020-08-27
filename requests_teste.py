@@ -65,11 +65,8 @@ def login_usuarios():
     return post.json()['acces_token']
 
 
-def logout_usuarios():
-    data = {
-
-    }
-    post = requests.post("http://127.0.0.1:5000/logout/", json=data)
+def logout_usuarios(token):
+    post = requests.post("http://127.0.0.1:5000/logout", headers={"Authorization": f"Bearer {token}"})
     print(post.json())
 
 
@@ -94,7 +91,9 @@ def post_hotel_token(token):
     print(post.json())
 
 
-post_hotel_token(login_usuarios())
+# post_hotel_token(login_usuarios())
 
-get_hoteis()
+logout_usuarios(login_usuarios())
+
+# get_hoteis()
 
