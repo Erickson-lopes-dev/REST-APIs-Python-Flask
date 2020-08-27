@@ -45,10 +45,35 @@ def delete_hotel():
     print(delete.json())
 
 
-# get_hotel()
-# print('\n')
-# post_hotel()
-# print('\n')
-# get_hotel()
+def get_usuarios():
+    get = requests.get("http://127.0.0.1:5000/usuarios/1")
+    print(get.json())
 
-get_hoteis()
+
+def delete_usuarios():
+    delete = requests.delete("http://127.0.0.1:5000/usuarios/1")
+    print(delete.json())
+
+
+def login_usuarios():
+    data = {
+
+    }
+    post = requests.post("http://127.0.0.1:5000/login/", json=data)
+    print(post.json())
+
+
+def logout_usuarios():
+    data = {
+
+    }
+    post = requests.post("http://127.0.0.1:5000/logout/", json=data)
+    print(post.json())
+
+
+def cadastro_usuarios():
+    data = {
+
+    }
+    post = requests.post("http://127.0.0.1:5000/logout/", json=data)
+    print(post.json())
